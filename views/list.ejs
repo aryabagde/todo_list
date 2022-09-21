@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>To Do List</title>
+        <link rel="stylesheet" href="css/styles.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+    </head>
+
+
+    <!-- // We will be using forEcah instead of normal for loop, we tap into a method on an array. -->
+    <body>
+        <div class="box" id="heading">
+            <h1 > <%= listTitle %> </h1>
+        </div>
+        <div class="box">
+            <!-- forEach to loop through array items -->
+            <% newListItems.forEach(function(item){ %>
+                <!-- make sure to chnage the css for global form, since this form has no button to submit form we will be using onChange, also we need to give another name so that we can tap into the body -->
+                <form action="/delete" method="post">                                   
+                    <div class="item">
+                        <!-- value will define what we the checkbox will be returning  -->
+                        <input type="checkbox" name="checkbox" value="<%=item._id%>" onChange="this.form.submit()"> 
+                        <p><%= item.name %></p>
+                    </div>
+                    <input type="hidden" name="listName" value="<%= listTitle %>">
+                </form>
+            <% }) %>
+
+            <form class="item" action="/" method="post">
+                <!-- placeholder is for the new items user is going to add, and autocomplete off so that no auto suggestions 
+                The value of button will be saved as Work since the listTitle is named as Woek(space)List-->
+                <input type="text" name="newItem" placeholder="New Item" autocomplete="off"> 
+                <button type="submit" name="list" value="<%= listTitle %>">+</button>
+            </form> 
+        </div>
+
+
+    </body>
+</html>
